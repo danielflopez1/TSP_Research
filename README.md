@@ -1,6 +1,8 @@
 # Machine Learning Traveling Salesman Problem and Knapsack Approximation
 
-This [research project](https://drive.google.com/file/d/1zufq8r2DzvAyCCHte3wBOf_HJJQN0nef/view?usp=sharing) tackled the combinatorial optimization of the Traveling Salesman Problem (TSP) using various types of artificial neural networks. Multiple inputs were used, including adjacency matrices, eigenvectors. The problem was approached using Multi-Layered Perceptrons (MLP), Convolutional Neural Networks (CNN) and Pointer Networks. Different configurations of neural networks were implemented, such as Parallel input CNNs and Parallel input MLPs and a TSP approximation using pointer networks in a branch and bound algorithm.
+# Machine Learning Traveling Salesman Problem and Knapsack Approximation
+
+This [research project](https://drive.google.com/file/d/1zufq8r2DzvAyCCHte3wBOf_HJJQN0nef/view?usp=sharing) tackled the combinatorial optimization of the Traveling Salesman Problem (TSP) using various types of artificial neural networks. We developed a branch and bound algorithm which takes in a neural network that can generate a heuristic of the path or the cost of the TSP. This required multiple inputs such as adjacency matrices, eigenvectors, and combinations of the two. The problem was approached using Multi-Layered Perceptrons (MLP), Convolutional Neural Networks (CNN), Long short-term memory networks(LSTM) and Pointer Networks. Different configurations of neural networks were implemented, such as Parallel input CNNs and Parallel input MLPs to generate a TSP approximation used in a branch and bound algorithm.
 
 ## Prerequisites
 ```
@@ -23,15 +25,33 @@ gm.tsp_data()
 This will generate a pickle file of Adjacency matrices, paths and costs.
 
 ### Neural networks .py files
-Can be oppened and tested after generating the data as 
+For all files you can open the class, add the premade data as such:
 ```
-gm = Data_Generator(size = 10, num_data = 1000000, directed = False)
-gm.tsp_data()
+dnn = NNTSP()
+dnn.get_pickles(eigen = True) 
 ```
-### Google Colab Jupyter Notebooks
-See "To use Google Colab Juypter Notebooks.pdf" for reference
+#### direct_mlp_cnn_lstm_eigen.py
+This file is used to test multiple neural networks with similar hyperparameters
+Call the network you want to train and save the model. Each network will show the results as a print.
+You may change the hyperparameters in the file.
+```
+dnn.mlp_tsp_train()
+dnn.cnn_tsp_train()
+dnn.lstm_tsp_train()
+```
 
-You can run the latest [example](https://colab.research.google.com/drive/1bY9HB5v2sRuoX9jHnWo-Wni7qVZUINoJ) of a branch and bound using pointer networks. 
+##### mlp_tsp_dif_loss.py
+This file was used to test different loss functions and can run as such:  
+```
+dnn.mlp_loss_tsp_train()
+```
+
+#### Pointer-Networks
+I have set the pointer network and dynamic programming in the dynamic_path_pointer-net.ipynb which can be opened in Google Colab for testing.
+##### Google Colab Jupyter Notebooks
+See "To use Google Colab Juypter Notebooks.pdf" for reference.
+
+You can run the latest file [here](https://colab.research.google.com/drive/1bY9HB5v2sRuoX9jHnWo-Wni7qVZUINoJ) of branch and bound using pointer networks. 
 
 
 ## References
@@ -40,13 +60,9 @@ Code:
 
 Please read:
  * [Pointer Networks](https://arxiv.org/abs/1506.03134) paper for details on Pointer Networks.
- * [Demystifying Parallel and Distributed Deep Learning: An In-Depth Concurrency Analysis](https://arxiv.org/abs/1802.09941) for ideas in paralellism.
+ * [Demystifying Parallel and Distributed Deep Learning: An In-Depth Concurrency Analysis](https://arxiv.org/abs/1802.09941) for ideas in parallelism.
 
 ## Authors
 
 * Daniel Lopez
 * Sanjiv Kapoor
-
-## Notes
-This research is in progress
-
