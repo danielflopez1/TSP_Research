@@ -24,24 +24,23 @@ gm.tsp_data()
 This will generate a pickle file of Adjacency matrices, paths and costs.
 
 ### Neural networks .py files
-For all files you can open the class, add the premade data as such:
-```
-dnn = NNTSP()
-dnn.get_pickles(eigen = True) 
-```
 #### direct_mlp_cnn_lstm_eigen.py
 This file is used to test multiple neural networks with similar hyperparameters
 Call the network you want to train and save the model. Each network will show the results as a print.
-You may change the hyperparameters in the file.
+You may change the hyperparameters in the file, and change eigen to false if you want to use Adjacency matrices as input.
 ```
+dnn = NNTSP()
+dnn.get_pickles(eigen = True) 
 dnn.mlp_tsp_train()
 dnn.cnn_tsp_train()
 dnn.lstm_tsp_train()
 ```
 
 ##### mlp_tsp_dif_loss.py
-This file was used to test different loss functions and can run as such:  
+This file was used to test different loss functions using adjacency matrices. To use type and run:  
 ```
+dnn = NNTSP()
+dnn.get_pickles()
 dnn.mlp_loss_tsp_train()
 ```
 
