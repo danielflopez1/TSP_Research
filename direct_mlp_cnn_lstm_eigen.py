@@ -97,6 +97,7 @@ class NNTSP:
             print(predictions[i], "==", y_test[i])
 
     # Train and test LSTM accuracy with both adjacency matrix and adjacency eigenvalue matrix
+    # Given we are not training the LSTM over inputs per time, we do not use Time Distributed.
     def lstm_tsp_train(self):
         X_train, X_test, y_train, y_test = train_test_split(self.xs, self.xs, test_size = 0.2, random_state = 42)
         print(X_train.shape)
@@ -124,12 +125,3 @@ class NNTSP:
 
         for i, pred in enumerate(predictions):
             print(predictions[i], "==", y_test[i])
-
-
-
-if __name__=="__main__":
-    dnn = NNTSP()
-    dnn.get_pickles()
-    dnn.mlp_tsp_train()
-    dnn.cnn_tsp_train()
-    dnn.lstm_tsp_train()
