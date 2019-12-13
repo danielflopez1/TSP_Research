@@ -48,5 +48,5 @@ Please read:
 * Sanjiv Kapoor
 
 ## Notes
-This research is incomplete
+This research is in progress
 
