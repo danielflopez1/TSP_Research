@@ -30,7 +30,7 @@ Can be oppened and tested after generating the data as
 gm = Data_Generator(size = 10, num_data = 1000000, directed = False)
 gm.tsp_data()
 ```
-#### Google Colab Jupyter Notebooks
+### Google Colab Jupyter Notebooks
 See "To use Google Colab Juypter Notebooks.pdf" for reference
 
 You can run the latest [example](https://colab.research.google.com/drive/1bY9HB5v2sRuoX9jHnWo-Wni7qVZUINoJ) of a branch and bound using pointer networks. 
