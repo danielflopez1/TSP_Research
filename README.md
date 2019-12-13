@@ -2,29 +2,38 @@
 
 This research tackled the combinatorial optimization of the Traveling Salesman Problem (TSP) using various types of artificial neural networks. Multiple inputs were used, including adjacency matrices, eigenvectors. The problem was approached using Multi-Layered Perceptrons (MLP), Convolutional Neural Networks (CNN) and Pointer Networks. Different configurations of neural networks were implemented, such as Parallel input CNNs and Parallel input MLPs and a TSP approximation using pointer networks in a branch and bound algorithm.
 
-
-### Prerequisites
-
-This project contains both python .py and Jupyter notebook .ipynb files. This project uses Python 3.6 with the following libraries:
-
+## Prerequisites
 ```
-Tensorflow=1.15.0
-```
-```
- Keras=2.2.5
-```
-```
- numpy=1.17.4
+Tensorflow
+Keras
+numpy
+pickle
+tsp
+networkx
 ```
 
-### Running
+## Running
+Each python file is independent and can be run independently. 
 
-The .py files may be used in Google Colaboratory if you don't have the required libraries.
+### Generate Data
+Use the DataGenerator.py by setting the size of the graph you want, number of data_points you need and if the adjacency matrices will be directed or undirected. 
+```
+gm = Data_Generator(size = number_of_nodes, num_data = 1000000, directed = False)
+gm.tsp_data()
+```
+##### Output
+This will generate a pickle file of Adjacency matrices, paths and costs.
 
-This can be done by copy and pasting the code in a Colaboratory Cell. 
+### Neural networks .py files
+Can be oppened and tested after generating the data as 
+```
+gm = Data_Generator(size = 10, num_data = 1000000, directed = False)
+gm.tsp_data()
+```
+#### Google Colab Jupyter Notebooks
+See "To use Google Colab Juypter Notebooks.pdf" for reference
 
-The Jupyter Notebooks can be uploaded and ran. 
-You can run this [example](https://colab.research.google.com/drive/1bY9HB5v2sRuoX9jHnWo-Wni7qVZUINoJ) of a branch and bound using pointer networks. 
+You can run the latest [example](https://colab.research.google.com/drive/1bY9HB5v2sRuoX9jHnWo-Wni7qVZUINoJ) of a branch and bound using pointer networks. 
 
 
 ## References
@@ -37,8 +46,9 @@ Please read:
 
 ## Authors
 
-**Daniel Lopez**  [webpage](https://www.daniellopez.me/)
+* Daniel Lopez
+* Sanjiv Kapoor
 
-## License
+## Notes
+This research is incomplete
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
