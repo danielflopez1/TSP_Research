@@ -12,9 +12,7 @@ tsp
 networkx
 ```
 
-## Running
-Each python file is independent and can be run independently. 
-
+## Running and Testing
 ### Generate Data
 Use the DataGenerator.py by setting the size of the graph you want, number of data_points you need and if the adjacency matrices will be directed or undirected. 
 ```
