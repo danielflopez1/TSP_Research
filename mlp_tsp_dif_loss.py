@@ -33,7 +33,7 @@ class NNTSP:
         self.ys = np.array(self.ys) / 10 - 0.1
 
     # Train and test MLP accuracy with both adjacency matrix and adjacency eigenvalue matrix
-    def mlp_tsp_train(self):
+    def mlp_loss_tsp_train(self):
         X_train, X_test, y_train, y_test = train_test_split(self.xs, self.ys, test_size=0.2, random_state=42)
         inputs = Input(shape=(10,10,1))
         flat = Flatten()(inputs)
