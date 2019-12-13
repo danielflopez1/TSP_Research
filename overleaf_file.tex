@@ -1,0 +1,465 @@
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% IIT Sample THESIS File,   Version 3, Updated by Babak Hamidian on 11/18/2003
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% File: sample3.tex                                   %
+% IIT Sample LaTeX File                               %
+% by Ozlem Kalinli on 05/30/2003                      %
+% Revised by Babak Hamidian on 11/18/2003             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                     %
+% This is a sample thesis document created using      %
+% iitthesis.cls style file. The PDF output is also    %
+% available for your reference. In this file, it has  %
+% been illustrated how to make table of contents,     %
+% list of tables, list of figures, list of symbols,   %
+% bibliography, equations, enumerations, etc.         %
+% You can find detailed instructions                  %
+% for using the style file in Help.doc,               %
+% TableHelp.doc, FigureHelp.doc, and                  %
+% Bibliography.doc files.                             %
+%                                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Note: The texts that are used in this sample3.tex   %
+% file are irrelevant. They are just used to show     %
+% you the style created by iitthesis style file.      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{iitthesis}
+
+
+% Document Options:
+%
+% Note if you want to save paper when printing drafts,
+% replace the above line by
+%
+%   \documentclass[draft]{iitthesis}
+%
+% See Help file for more about options.
+
+\usepackage{graphicx}    % This package is used for Figures
+\usepackage{rotating}           % This package is used for landscape mode.
+\usepackage{epsfig}
+\usepackage{subfigure}          % These two packages, epsfig and subfigure, are used for creating subplots.
+\usepackage{amsmath}
+\usepackage{verbatimbox}
+\usepackage{apacite}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{pdfpages}
+% Packages are explained in the Help document.
+
+
+\begin{document}
+
+%%% Declarations for Title Page %%%
+\title{Report on Machine Learning Heuristic approximation on \\
+   Knapsack and Traveling Salesman problems}
+\author{Daniel Felipe Lopez Morales}
+\degree{Master of Science}
+\dept{Computer Science}
+\date{Spring 2018 - Fall 2019}
+\copyrightnoticefalse      % crate copyright page or not
+%\coadvisortrue           % add co-advisor. activate it by removing % symbol to add co-advisor
+\maketitle                % create title and copyright pages
+
+
+\prelimpages         % Settings of preliminary pages are done with \prelimpages command
+
+% Table of Contents
+\tableofcontents
+\clearpage
+
+% List of Tables
+\listoftables
+
+\clearpage
+
+%List of Figures
+\listoffigures
+
+\clearpage
+
+%List of Symbols(optional)
+
+\listofsymbols
+ \SymbolDefinition{$v$}{Value of an object}
+ \SymbolDefinition{$x$}{Integer value}
+ \SymbolDefinition{$W$}{Maximum weight in knapsack}
+ \SymbolDefinition{$N$}{Number of nodes/points/objects}
+ \SymbolDefinition{$n$}{Number of inputs}
+
+
+ \clearpage
+
+
+
+%%% Abstract %%%
+\begin{abstract}           % abstract environment, this is optional
+\par This paper tackles combinatorial optimization problems using various types of artificial neural networks. The focus is on Knapsack 1-0 problem and Traveling Salesman Problem (TSP). We compare Multi-Layered Perceptrons (MLP), Convolutional Neural Networks (CNN), Parallel input MLP for the Knapsack problem. In addition we compare MLP’s CNN, Parallel input CNNs, Pointer Networks and Dynamic programming with Pointer Networks. The TSP is trained and tested with a range of 80-20 on 5,10 nodes for MLP’s CNN, Parallel input MLP, Parallel CNN’s and 5,10,20 for Pointer Networks and Dynamic programming using Pointer Networks.  
+% or \input{abstract.tex}  %you need a separate abstract.tex file to include it.
+\end{abstract}
+
+
+\textpages     % Settings of text-pages are done with \textpages command
+
+% Chapters are created with \Chapter{title} command
+\Chapter{INTRODUCTION}
+
+% Section are created with \Section{title} command
+\Section{The Knapsack Problem} \label{sec:int}
+
+The knapsack problem is an optimization problem where given a knapsack with maximum capacity and a set of objects with weight and value, maximizes the value of the objects which fit the knapsack capacity. The knapsack problem can be stated as the linear programming as such:
+% Equation Example1
+
+\begin{equation}
+\begin{array}{ll@{}ll}
+\text{maximize}  & \displaystyle\sum\limits_{i=1}^{n} &v_{i}x_{i} \\
+\text{subject to}& \displaystyle\sum\limits_{i=1}^{n} &w_{i}x_{i} \leq W,\\
+                 &  &x_{j} \in \{0,1\}, & \forall i \in N 
+\end{array}
+\end{equation}
+Where v, is the value of the object, w is the weight of the object and W is the size of the Knapsack x is a binary variable of 0 or 1 which dictates if the object is chosen or not.  Therefore we maximize the value for a positive integer of objects. 
+
+\Section{Data Generation}
+The common parameters of a 1-0 Knapsack are sack size, the number of objects and possible sizes and values to those objects. The optimum number of objects was selected by the brute force solution of permuting the sets and getting the minimum value of the sets. The weights have been pseudo random using random.randint() which uses a discrete uniform distribution. 
+
+We generated 29000 simulations with the following parameters: First, modified the number of objects available $N$ and set the Knapsack size $W$ constant 50 units of weight(Figure 1.1). The values and the weight were randomized using $N$ was set from 10 to 300 and the number of items is increased by 10. Each data point in the graph is an average, maximum and minimum for 1000 instances of the same inputs. 
+
+\includepdf[pages=1]{Algorithm1.pdf}
+
+
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/KnapsackTrend1.png}
+    \caption{The knapsack items not chosen are Blue and the chosen items have Red stars. 
+}
+    \label{fig:trend1}
+\end{figure}
+
+ Second, we modified the Knapsack size $W$ and set the number of objects available $N$ constant(Figure 1.2). The size of the sack was constant at 50 weight units. The values and the weight were randomized using $N$ was set from 10 to 300 and the number of items is increased by 10. Each data point in the graph is an average, maximum and minimum for 1000 instances of the same inputs. This process also reflects a similar pattern as Figure 1.1. 
+ 
+ Finally, we modified both the objects and the sack size we get an almost initial linear relationship as seen in Figure 1.3. These data allows us to have a minimum and maximum bound while having a sense of average knapsack growth. These bounds could be used for Branch and Bound dynamic programming and for better approximations with other methods. 
+ 
+
+%After a logarithmic approximation, the logarithm that fit best was approximated to:
+%5*ln((82/1000)*x).
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/KnapsackTrend2.png}
+    \caption{Trend given the modification only in the amount of objects.}
+    \label{fig:trend2}
+\end{figure}
+
+%Given the data, we are able to sustain that given a knapsack size and number of objects we can have an upper bound given by a logarithmic equation which roughly approximated is:
+%\begin{equation}
+%\displaystyle(5)*\text{ln}((82/1000)*x)+9
+%\end{equation}  where 9 is the maximum list difference between average number of objects selected and maximum number of objects elected.
+%\begin{equation}
+%\displaystyle((5)*\text{ln}((82/1000)*x))^2
+%\end{equation}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/KnapsackTrend3.png}
+    \caption{Trend given the modification only in the amount of objects.}
+    \label{fig:trend3}
+\end{figure}
+
+
+\newpage
+
+\Subsection{Multi-Layer Perceptrons on Knapsack} Artificial Neural Networks are able to approximate complex models. To do this the neural networks are based on different layers. The three main layers are the input, hidden and output layers. The input layers consist of the input of the data that is being fed into the neural network. The hidden layer consist in a sum of the inputs (Eq. 1.2):
+\begin{equation}
+\displaystyle S_{j} = \sum\limits_{i=1}^{n} \omega_{i,j}I_{i}+ \beta_{j}
+\end{equation}
+Where $S_j$ is the sum for the $j$'th neuron, n is the number of inputs of the previous layer, $I$ is the output of the previous layer (or the data in the input layer), $\omega$ is the weight of the connection and $\beta$ is the bias value
+And an activation function such as the which we are using called Sigmoid: 
+\begin{equation}
+\displaystyle f_{j}(x) = \dfrac{1}{1+e^{-S_j}}
+\end{equation}
+
+\Subsubsection{Training}
+The input layer will contain the vector of object values, however, since the objects contain weight and value, the vector is split in two and concatenated. Making it a 2N vector.  This way each weight and value vector corresponds to its object\cite{hellstrom1992knapsack}, therefore, for every N objects we get a 2N vector as input. The output to train for is made by knapsack optimum solution. The data, of 10000 of 10 - 60 objects and 50 as Knapsack size, was split on a 80\% training 10\% validation 10\% test data. The neural network is made with Tensorflow Keras using 4 layers with ReLu activation, Adam as the optimizer with 0.0001 learning rate, and binary\_crossentropy as the loss function. The model acquired a 86\% accuracy.
+
+\Subsubsection{Dynamic programming using Neural Network upper bound}
+ As the upper bound is added, there is not much change when modifying the number of objects or the sack size. The accuracy maintains the relatively the same. The values are created by creating 1000 problems per each point and calculating the total value after value removal using a heuristic. And dividing by the dynamic knapsack total value which can be seen in the Table 1.1.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./images/Neural_Network.png}
+    \caption{Neural Network Model used}
+    \label{fig:trend3}
+\end{figure}
+
+% Table Example1
+
+\begin{table}[ht]
+\caption{Heuristic values on Simple Neural Network}   % title of Table
+\centering                          % used for centering table
+\begin{tabular}{c c c c c c c c}            % centered columns (4 columns)
+\hline\hline                        % inserts double horizontal lines
+
+Loss& Accuracy &  Heuristic &Real Value &Ratio &Time & Number of Items \\ [0.3ex] % inserts table heading
+\hline                              % inserts single horizontal line below heading
+0.2954&0.8758&141166&176898&0.7980&4.557836&10 \\
+
+0.4587&0.7803&119173&275310&0.4329&11.58403&20\\
+0.4797&0.7815&97745&320458&0.4329&19.17868&30\\
+
+0.4661&0.7942&105528&355489&0.2969&28.52071&40\\
+
+0.5047&0.7817&26184&414311&0.0632&41.73136&50\\
+
+0.4855&0.7957&22693&463741&0.0489&56.59059&60\\ [1ex]         % [1ex] adds vertical space
+\hline                              % inserts single line
+\end{tabular}
+\label{table:nonlin}                % is used to refer this table in the text
+\end{table}
+
+
+\newpage
+\Chapter{Traveling Salesman Problem}
+\Section{Traveling Salesman Problem Introduction}
+Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city once and returns to the original city. It is an NP-hard problem in combinatorial optimization, important in operations research and theoretical computer science. TSP can be asymmetric or directed:
+
+\begin{equation}
+\begin{array}{ll@{}ll}
+\text{minimize}  & \displaystyle\sum\limits_{i=1}^{n} &c_{ij}x_{i,j} \\
+\text{subject to}& \displaystyle\sum\limits_{i=1}^{n} &x_{ij}=1,    i = 0,1,...,n-1\\
+                 & \displaystyle\sum\limits_{j=1}^{n} &x_{ij}=1,    j = 0,1,...,n-1\\
+                 &\displaystyle\sum\limits_{i} \displaystyle\sum\limits_{i}&x_{i,j}\leq |S|-1, S \subset V, 2\leq |S| \leq n-2  \\
+                 &&x_{ij} \in \{0,1\},  \forall i,j \in E \\ 
+\end{array}
+\end{equation}
+It can also be symmetric or undirected:
+\begin{equation}
+\begin{array}{ll@{}ll}
+\text{minimize}  & \displaystyle\sum\limits_{i=1}^{n} &c_{ij}x_{i,j} \\
+\text{subject to}& \displaystyle\sum\limits_{i<k}^{n} &x_{ik}+\sum\limits_{j>k}^{n} x_{jk}=2,  k \in V1\\
+                 &\displaystyle\sum\limits_{i} \displaystyle\sum\limits_{j}&x_{i,j}\leq |S|-1, S \subset V, 3\leq |S| \leq n-3  \\
+                 &&x_{ij} \in \{0,1\},  \forall i,j \in E \\ 
+\end{array}
+\end{equation}
+\newline
+Where x  is a binary variable of 0 or 1 which dictates if the object is chosen or not. The S is the set of cities/points/nodes,  V is vertices and E are edges. 
+
+\Subsection{Data Preparation}
+The adjacency matrix was created with a uniform random variables from 0 to 100, and to normalize the matrices we divided by 100. The costs were divided by 1000 given the maximum value of the costs was 992. In the case of paths, when using softmax, the output was divided by $n$ the length of the path. Also the accuracy in the neural networks was measured in different ways depending on the output. If the output is a single number, mean squared error was used. If the output was a path, the error of the cost of the path was used for the mean squared error.
+\includepdf[pages=1]{Algorithm2.pdf}
+
+\Subsection{Data Analysis}
+40000 instances of undirected adjacency matrices were created, where 0's are set as a large value of 999 to deter the tsp solver from allocating the diagonal or non existent paths. The matrices we used the  dynamic programming TSP solver is found in python's tsp library (https://pypi.org/project/tsp/) . The optimum values gave us important insights. First, the sum of the minimum values of each column gives a lower boundary for the TSP and the sum of the upper triangle of the adjacency matrix gives a upper bound to the TSP which can be seen in Figure 2.1. Second, doing eigenvalue analysis of the TSP we fund that the sum of the 3 lowest eigenvalues on a 5x5 matrix predicts if the adjacency matrix has a solution. It can be seen in Figure 2.2 that the sum of the 3 lowest eigenvalues varies while there is a path for TSP, which is where the cost is less than 999. Once there is no path the sum of the 3 lowest eigenvalues drop significantly. However, it is hard to find a pattern once the every TSP as a path as we can see in Figure 2.3.
+
+ 
+\begin{figure}   
+    \centering
+    \includegraphics[width=\textwidth]{./images/Tsp_organized.png}
+    \caption{TSP costs sorted by optimum value}
+    \label{fig:trend3}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./images/TSP_cost_Eigens_on_out.png}
+    \caption{ 
+TSP costs on path and no path on small adjacency matrices}
+    \label{fig:trend3}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./images/Eigens_on_in.png}
+    \caption{
+TSP costs on large adjacency matrices}
+    \label{fig:trend3}
+\end{figure}
+
+
+\Subsection{Dynamic programming with upper branch and bound}
+For this case, the data is created by generating an undirected graph with uniform distribution on the upper triangle mirrored by the lower triangle. We create the data by groups of 100000 data points of 5 to 50 cities with increments by 5. The upper bound is made by the sum of the elements of the upper triangular. Therefore, whenever a branch in the dynamic program was higher than the sum of the upper triangular it is pruned. We can see how this upper triangular branch and bound helps in the time of finding the optimum TSP in Table 2.1.
+
+\begin{table}[ht]
+\caption{Times of different dynamic programs }   % title of Table
+\centering                          % used for centering table
+\begin{tabular}{c c c c c c c}            % centered columns (4 columns)
+\hline\hline     `                   % inserts double horizontal lines
+
+N& Naive &  Dynamic Programming  &Branch and Bound \\ & & &Dynamic Programming \\ [0.3ex] % inserts table heading
+\hline                              % inserts single horizontal line below heading
+2&3.7534e-06&3.5177e-05&3.3453e-05\\
+3&1.0361e-05&5.5103e-05&5.5054e-05\\
+4&3.8005e-05&1.0624e-04&1.1638e-04\\
+5&1.9681e-04&2.6569e-04&2.5511e-04\\
+6&1.2557e-03&8.4294e-04&7.7096e-04\\
+7&9.4897e-03&1.9423e-03&1.8993e-03\\
+8&9.9703e-02&5.1774e-03&5.3715e-03\\
+9&8.7732e-01&1.3077e-02&1.2818e-02\\
+10&9.4132e+00&3.9286e-02&3.3693e-02\\
+11&1.0340e+02&9.3425e-02&1.2762e-01\\
+12&1.3519e+03&2.0254e-01&1.9764e-01\\
+13&1.7062e+04&5.4397e-01&4.9735e-01\\ [1ex]         % [1ex] adds vertical space
+\hline                              % inserts single line
+\end{tabular}
+\label{table:nonlin}                % is used to refer this table in the text
+\end{table}
+We can note that the bigger the network the better the Branch and Bound dynamic programming does compared to the not bound dynamic programming.  
+
+\Subsection{Low Accuracy Test Networks}
+ Here, we examine several suggested methods of neural networks which did not result in accuracy over 50\%.
+ 
+\Subsubsection{Fully connected MLPs}
+ First, a MLP with $n^2$ inputs, 4 hidden layers with ReLu activation as: $2n^2, 4n^2, 4n^2, 2n^2$ and output layer of 1 sigmoid, using mean squared error (MSE) as the loss function and Adam as its optimizer. The output is compared directly to the TSP value.  The second is the same as the first with a modification of the output layer. The output layer is has $n$ neurons, with softmax we test the difference between the path and the output. 
+ 
+\Subsubsection{CNN}
+Using the unweighted adjacency matrix as input $n^2$ we convolute using $2*n^2$ using 156 Conv2D neurons, maxpool of (2,2), 3 times and 2 Dense layers of n and 1 corresponding neurons with ReLu and sigmoid activation functions. The optimization is Adam with MSE loss function which compares the output to the path cost. 
+
+\Subsection{Context CNN}
+This network required a different input preparation. We had the adjacency matrix repeated n times which correspond to a row and column. Then, link the row to the corresponding real value. Therefore the network would be trained by the matrix, a row and column to get the error of the single path value. 
+This network is the convolutional network described above along with a parallel input of each row and column as vectors. Therefore we have $n^2 + 2n$. This idea was to give context about the graph along with the individual row and column. Convolute using $2*n^2$ using 156 Conv2D neurons , maxpool of (2,2), 3 times and parallel dense 2n neurons. Concatenate the output of the maxpool with the output of the dense network and 2 Dense layers of n and 1 corresponding neurons with ReLu and sigmoid activation functions. The optimization is Adam with MSE loss function which compares the output to the path cost.
+
+
+\begin{table}[ht]
+\caption{Accuracies using 10 nodes of training data }   % title of Table
+\centering                          % used for centering table
+\begin{tabular}{c c c c c }            % centered columns (4 columns)
+\hline\hline     `                   % inserts double horizontal lines
+
+Network & Un-directed weights &  Directed weights  & Eigenvalue matrix \\ [0.3ex] % inserts table heading
+\hline                              % inserts single horizontal line below heading
+MLP&35\%&23\%&30\%\\
+CNN&31\%&21\%&20\%\\
+Context CNN&30\%&17\%&20\%\\ [1ex]         % [1ex] adds vertical space
+\hline                              % inserts single line
+\end{tabular}
+\label{table:nonlin}                % is used to refer this table in the text
+\end{table}
+
+\Subsection{Pointer Network for TSP Approximation}Pointer networks\cite{vinyals2015pointer} are a variation of the sequence-to-sequence model with attention. Instead of translating one sequence into another, they have variable size points as inputs and yield a succession of attention encoding as a pointer to select an input element. The encoded latent space is then sorted and decoded by an LSTM arranging it into a path.  This network is able to learn from the points to minimize the error on the optimum path and that way be trained to predict the optimum path. Please refer to https://arxiv.org/abs/1506.03134 to go into more detail in Pointer Networks.
+
+\Subsubsection{Data Generation}
+The data used was generated by generating uniformly random variables with a range from 0 to 1 and for each two variables a point is generated. Every point's distance to each other is calculated by euclidean distance and an adjacency matrix is generated. The optimum path is calculated using the dynamic tsp program in the python tsp library. This path is used as labels. 
+
+\Subsection{Shortest Path Approximation with a Pointer Network} 
+Using the Pointer Network we have described before, we made a change in the training. Instead of using TSP we have generated the data to train from points to the shortest path from randomly selected points to another randomly selected point while going through all the other points. By Generating the shortest path we train the network to have input points and output the shortest path. This gave us a 87\% accuracy.
+
+\Section{Branch and Bound using Pointer Network}
+Training the Pointer Network with 5 point optimum path cost with 88\% accuracy we are able to approximate a cost of the path. We created a Dynamic programming with memoization which creates a map of cost of the getting to nodes(points) from an initial position. By generating trees of points and its costs we are able to get the costs when we arrive a the same node through a seen path. The dynamic programming also has a branch and bound, where after getting the end of a tree a path cost is set as minimum value, if a branch of the node tree is seen to have a higher cost it is pruned. 
+
+The memoization technique  in the dynamic programming allow us to use the pointer network for a cost prediction. Whenever there are 5 points in a tree that have not been seen, the prediction will get the cost. This cost will be then compared with the minimum value and assessed if it needs to be iterated. 
+
+\includepdf[pages=1]{Algorithm3.pdf}
+\includepdf[pages=2]{Algorithm3.pdf}
+
+
+
+\begin{table}[ht]
+\caption{Branch and Bound Dynamic program Accuracies per nodes }   % title of Table
+\centering                          % used for centering table
+\begin{tabular}{c c }            % centered columns (4 columns)
+\hline\hline                        % inserts double horizontal lines
+
+Nodes & Accuracy \\ % inserts table heading
+\hline                              % inserts single horizontal line below heading
+
+5&98\%\\
+10&89\%\\
+15&81\%\\
+20&74\%\\ [1ex]         % [1ex] adds vertical space
+\hline                              % inserts single line
+\end{tabular}
+\label{table:nonlin}                % is used to refer this table in the text
+\end{table}
+
+
+
+
+\Section{Conclusions}
+As we have tested the various networks on the Knapsack and Traveling Salesman Problem, it is concluded that the networks are able to identify certain aspects of the adjacency matrices, the eigenvalue matrices and that more data or dividing data to give context does not correspond to better accuracy. We have to also note that the difficulty in most neural networks is due to the randomization factor in the data, since an adjacency matrix can vary, each element except for the diagonal in it is needed to get an optimum path. This leads to the need of comparison between each element in its row and column over multiple elements with a step in its neighbors and do more comparisons. The sequence to sequence networks like the pointer network helps in this task which can be seen in the accuracy we got. 
+
+\Section{Future Work}
+Finally we believe there is more to do, something that has yet to optimize the parallel CNN layers and to check the best layer to append both the CNN and row perceptron layers and to add the eigen vectors as a row in the parallel CNN. 
+
+
+
+% Figure Example2
+% An Example for importing an eps file
+%\begin{figure}[ht]
+  %\centering                % centering figure
+  %\scalebox{0.5}            % rescale the figure by a factor of 0.8
+  %{\includegraphics{kapsack_points.png}}   % importing figure
+ % \caption{Fuel Metabolism results with Method A}        % title of figure
+ % \label{fig:exm}                  % labelling to refer it inside the text
+%\end{figure}
+
+
+% Figure Example5
+% Creating subfigures
+%\begin{figure}[h]
+ %\vspace{10pt}
+   %\centering
+ %\mbox{\subfigure[Big]{\epsfig{figure=matlab.ps,width=3in}}\quad
+   %    \subfigure[Small]{\epsfig{figure=matlab.ps,width=2in}}}
+ %\caption{Fuel Metabolism results using Method XYZ in complex systems for both linear and Nonlinear behavior cases}
+ %\label{fig:SubF}
+ %\end{figure}
+
+
+
+
+%\Chapter{CONCLUSION}
+ %   \input{Conclusion.tex}
+ %You need a Conclusion.tex file
+
+
+%\Section{Summary}
+
+%This was just to create a sample section...
+
+%\clearpage
+
+
+%
+% APPENDIX
+%
+
+% Do the settings of appendices with \appendix command
+%\newpage
+%\appendix
+
+ %Then create each appendix using
+%\Appendix{title of appendix} 
+%\Appendix{Table of Transition Coefficients for the Design of
+%Linear-Phase FIR Filters}
+
+%Your Appendix will go here !
+
+%\moretox
+
+%\Appendix{Name of your Second
+%Appendix}
+
+%Your second appendix text....
+
+%\Appendix{Name of your Third Appendix}
+
+%Your third appendix text....
+
+%BIBLIOGRAPHY
+%
+% you have two options: 1) create bibliography manually,
+% 2) create bibliography automatically. See BibliographyHelp.pdf file for details.
+
+
+\bibliographystyle{apacite}
+\bibliography{mybib}
+
+\end{document}  % end of document
