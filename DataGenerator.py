@@ -5,38 +5,28 @@ import pickle
 import time
 
 
-class game:
-    def __init__(self):
+class Data_Generator:
+    def __init__(self):  # set initial variables for data generation
         self.change = 0
-        self.size = 5  # np.random.randint(5,10)
-        self.max_value = 100
+        self.size = 5 
+        self.max_value = 100  
 
-    def tsp_game(self):
+    def tsp_data(self):
         xs = []
         ys = []
-        for x in range(self.change,1000000):
-            if(self.change>1000000):
-                break
-            if(self.change%500 ==0):
-                print(self.change)
+        for x in range(self.change,1000000):  #Generate 1M datapoints
             GG = GraphGenerator.GraphGenerator(self.size, self.max_value)
             GG.undirected_graph()
-            g = np.array(GG.get_adjacency_matrix())
+            g = np.array(GG.get_adjacency_matrix())  #Create undirected adjacency matrix
             matrx = g.copy()
             g[g==0] = 999
-            #print(matrx)
-            self.path = tsp.tsp_dp_solve(g)
-
-            self.tsp_val = tsp.tour_len(self.path, g)
-
-            ys.append(self.tsp_val)
+            self.path = tsp.tsp_dp_solve(g)  #solve the tsp
+            self.tsp_val = tsp.tour_len(self.path, g) #get the tsp cost
+            ys.append(self.tsp_val)             #Add the data to the arrays
             xs.append(list(matrx.flatten()))
-            #print(xs, ys)
-            #input("")
             self.change +=1
-        #print(xs)
-        #print(ys)
-        pickle_file=open('m5tspxs.pickle','wb')
+            
+        pickle_file=open('m5tspxs.pickle','wb') #Pickle the data for later use
         pickle.dump(xs,pickle_file)
         pickle_file.close()
 
@@ -44,7 +34,7 @@ class game:
         pickle.dump(ys,pickle_file)
         pickle_file.close()
 
-    def get_pickles(self):
+    def get_pickles(self):                      #check the Pickle data
         pickle_file = open('xs.pickle', 'rb')
         datas = pickle.load(pickle_file)
         pickle_file.close()
@@ -54,6 +44,6 @@ class game:
         ydatas = pickle.load(pickle_file)
         pickle_file.close()
         print("---",ydatas)
-gm = game()
-gm.tsp_game()
+gm = Data_Generator()
+gm.tsp_data()
 gm.get_pickles()
