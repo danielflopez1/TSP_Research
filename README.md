@@ -1,6 +1,6 @@
 # Machine Learning Traveling Salesman Problem and Knapsack Approximation
 
-This research tackled the combinatorial optimization of the Traveling Salesman Problem (TSP) using various types of artificial neural networks. Multiple inputs were used, including adjacency matrices, eigenvectors. The problem was approached using Multi-Layered Perceptrons (MLP), Convolutional Neural Networks (CNN) and Pointer Networks. Different configurations of neural networks were implemented, such as Parallel input CNNs and Parallel input MLPs and a TSP approximation using pointer networks in a branch and bound algorithm.
+This [research project](https://drive.google.com/file/d/1zufq8r2DzvAyCCHte3wBOf_HJJQN0nef/view?usp=sharing) tackled the combinatorial optimization of the Traveling Salesman Problem (TSP) using various types of artificial neural networks. Multiple inputs were used, including adjacency matrices, eigenvectors. The problem was approached using Multi-Layered Perceptrons (MLP), Convolutional Neural Networks (CNN) and Pointer Networks. Different configurations of neural networks were implemented, such as Parallel input CNNs and Parallel input MLPs and a TSP approximation using pointer networks in a branch and bound algorithm.
 
 ## Prerequisites
 ```
